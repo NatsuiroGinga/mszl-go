@@ -1,25 +1,37 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+var level = 1
+var ex = 0
 
 func main() {
+	fmt.Println("输入你的角色名字")
+	reader := bufio.NewReader(os.Stdin)
+	input, err := reader.ReadString('\n')
 
-	num := 10
-	fmt.Println("==first==")
-	modifyNum1(num)
-	fmt.Println("old num = ", num)
+	if err != nil {
+		panic(err)
+	}
 
-	fmt.Println("==second==")
-	modifyNum2(&num)
-	fmt.Println("old num = ", num)
-}
+	name := strings.TrimSpace(input)
 
-func modifyNum1(num int) {
-	num = 20
-	fmt.Println("new num = ", num)
-}
+	fmt.Printf("角色创建成功, %s, 等级为%d\n", name, level)
+	s := `你遇到一个怪物, 战斗还是逃跑
+		1. 战斗
+		2. 逃跑`
+	fmt.Println(s)
 
-func modifyNum2(num *int) {
-	*num = 30
-	fmt.Println("new num = ", *num)
+	for {
+		ans, err := reader.ReadString('\n')
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(ans)
+	}
 }
